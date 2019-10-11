@@ -1,0 +1,66 @@
+@model Racunala.Models.AktivnaRacunala
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Dobrodošli</h1>
+
+<p>
+    <a asp-action="Create">Unesi Novo</a>
+</p>
+<form asp-controller="Racunala" asp-action="Index" method="get">
+    <p>
+
+        <select asp-for="AktivnoRačunalo" asp-items="Model.Aktivna">
+            <option value="">Aktivna</option>
+        </select>
+
+        Lokacija: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Racunala[0].Lokacija)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Racunala[0].DatumPustanjaUPromet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Racunala[0].Aktivno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Racunala[0].DanasAktivno)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Racunala)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lokacija)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DatumPustanjaUPromet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aktivno)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DanasAktivno)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Uredi</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Obriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
